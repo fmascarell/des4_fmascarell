@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "title": "Accesorios",
+        "description": "Lentes mujer",
+        "price": 89990,
+        "thumbnail": "https://www.falabella.com/falabella-cl/product/126477167/Lentes-de-Sol-Traslucent-Brown-Ray-Ban/126477168",
+        "code": "126477168",
+        "stock": 56
+    },
+    {
+        "id": 3,
+        "title": "Accesorios",
+        "description": "Lentes mujer prueba",
+        "price": 140720,
+        "thumbnail": "https://www.prueba.cl",
+        "code": "115342272",
+        "stock": 25
+    },
+    {
+        "id": 4,
+        "title": "Accesorios prueba2",
+        "description": "Lentes mujer prueba2",
+        "price": 140720,
+        "thumbnail": "https://www.prueba2.cl",
+        "code": "115342272",
+        "stock": 25
+    }
+]
