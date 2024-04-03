@@ -1,0 +1,102 @@
+[
+    {
+        "id": 1,
+        "title": "Accesorios",
+        "description": "Anteojos de Sol Unisex Karun",
+        "price": 59990,
+        "thumbnail": "https://falabella.scene7.com/is/image/Falabella/50244888_1?wid=1500&hei=1500&qlt=70",
+        "code": "k01-24",
+        "stock": 56,
+        "status": true
+    },
+    {
+        "id": 2,
+        "title": "Accesorios",
+        "description": "Anteojos De Sol Mujer Gris Esprit",
+        "price": 54990,
+        "thumbnail": "https://falabella.scene7.com/is/image/Falabella/16075285_1?wid=1500&hei=1500&qlt=70",
+        "code": "e01-24",
+        "stock": 25,
+        "status": true
+    },
+    {
+        "id": 3,
+        "title": "Accesorios",
+        "description": "Anteojos de Sol Cascade Rojo Unisex Karun",
+        "price": 75990,
+        "thumbnail": "https://falabella.scene7.com/is/image/Falabella/50295196_1?wid=1500&hei=1500&qlt=70",
+        "code": "k02-24",
+        "stock": 25,
+        "status": true
+    },
+    {
+        "id": 4,
+        "title": "Accesorios",
+        "description": "Gafas De Sol Mujer Rubi",
+        "price": 4990,
+        "thumbnail": "https://falabella.scene7.com/is/image/Falabella/16328850_1?wid=1500&hei=1500&qlt=70",
+        "code": "r01-24",
+        "stock": 25,
+        "status": true
+    },
+    {
+        "id": 5,
+        "title": "Accesorios",
+        "description": "Lentes de Sol Azul Polarizados Timberland",
+        "price": 112990,
+        "thumbnail": "https://falabella.scene7.com/is/image/Falabella/gsc_117557747_1805040_1?wid=1500&hei=1500&qlt=70",
+        "code": "t01-24",
+        "stock": 25,
+        "status": true
+    },
+    {
+        "id": 6,
+        "title": "Accesorios",
+        "description": "Matte Black Exchange Sustentable Armani",
+        "price": 68900,
+        "thumbnail": "https://falabella.scene7.com/is/image/Falabella/gsc_112995169_486909_1?wid=1500&hei=1500&qlt=70",
+        "code": "a01-24",
+        "stock": 45,
+        "status": true
+    },
+    {
+        "id": 7,
+        "title": "Accesorios",
+        "description": "Lentes de Sol Dark Blue Polar RayBan",
+        "price": 124990,
+        "thumbnail": "https://falabella.scene7.com/is/image/Falabella/gsc_116928216_1607797_1?wid=1500&hei=1500&qlt=70",
+        "code": "b01-24",
+        "stock": 25,
+        "status": true
+    },
+    {
+        "id": 8,
+        "title": "Accesorios",
+        "description": "Lentes de Sol Jackie Negro RayBan",
+        "price": 123990,
+        "thumbnail": "https://falabella.scene7.com/is/image/Falabella/gsc_112981400_481200_1?wid=1500&hei=1500&qlt=70",
+        "code": "r02-24",
+        "stock": 30,
+        "status": true
+    },
+    {
+        "id": 9,
+        "title": "Accesorios",
+        "description": "Anteojos De Sol Oakley",
+        "price": 160720,
+        "thumbnail": "https://falabella.scene7.com/is/image/Falabella/gsc_115355698_1086126_1?wid=1500&hei=1500&qlt=70",
+        "code": "k02-24",
+        "stock": 25,
+        "status": true
+    },
+    {
+        "id": 10,
+        "title": "Accesorios",
+        "description": "Anteojos De Sol PR Blanco Prada",
+        "price": 336900,
+        "thumbnail": "https://falabella.scene7.com/is/image/Falabella/gsc_117126480_1669030_1?wid=1500&hei=1500&qlt=70",
+        "code": "p01-24",
+        "stock": 25,
+        "status": true
+    }
+]
