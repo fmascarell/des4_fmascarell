@@ -3,42 +3,31 @@ const filename = "../assets/productos.json";
 
 class ProductManager {
   #products = [];
-
   #maxId = 0;
 
   constructor() {
     this.#products = [];
   }
 
-  /**
-   * Utilizado para obtener el mayor ID del arreglo
-   * con este valor luego se aumenta para registrar un nuevo producto
-   */
+  /*Método para obtener el ID máximo de los productos. */
   getMaxId(arr) {
     let max = 0;
 
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i++)
       parseInt(arr[i].id) > max ? (max = arr[i].id) : max;
-    }
-
     return max + 1;
   }
 
+  /**lee los productos del archivo JSON y establece el ID máximo */
   async initialize() {
     this.#products = await this.readProductsFromFile();
-
     this.#maxId = this.getMaxId(this.#products);
   }
 
-  /**
-   * Leemos el archivo y su texto lo convertimos a JSON
-   * @returns array con registros
-   */
-
+  /**lee el contenido del archivo JSON y lo convierte en un objeto JavaScript */
   async readProductsFromFile() {
     try {
       const ProductsFileContent = await fs.promises.readFile(filename, "utf-8");
-
       const jsonFC = JSON.parse(ProductsFileContent);
 
       return jsonFC;
@@ -47,42 +36,22 @@ class ProductManager {
     }
   }
 
-  /**
-   *
-   * @returns Obtiene todos productos
-   */
+  /**Método que devuelve todos los productos */
   async getProducts() {
     return await this.readProductsFromFile();
   }
 
-  /**
-   * Busca la posición del producto dentro del array
-   *
-   * @param {code} codigo del producto
-   * @returns indice del producto
-   */
+  /**Método que busca la posición de un producto por su código */
   findProductIndex(code) {
     const productIndex = this.#products.findIndex((p) => p.code === code);
-
     return productIndex;
   }
 
   async isNumeric(value) {
     return /^\d+$/.test(value);
   }
-  /**
-   *
-   * Agreamos un nuevo producto previamente se validar que este no exista
-   *
-   * @param {String} title
-   * @param {String} description
-   * @param {Number} price
-   * @param {String} thumbnail
-   * @param {String} code
-   * @param {Number} stock
-   * @param {Boolean} status
-   * @returns
-   */
+
+  /**Método que agrega un nuevo producto al arreglo de productos */
   async addProduct(
     title,
     description,
@@ -96,7 +65,6 @@ class ProductManager {
       return "Debe enviar todos los valores (title, description, price, thumbnail, code, stock, status)";
 
     if (isNaN(price)) return "Price no válidos";
-
     if (isNaN(stock)) return "Stock no válidos";
 
     const productIndex = this.findProductIndex(code);
@@ -120,15 +88,10 @@ class ProductManager {
     };
 
     this.#products.push(product);
-
     return await this.#updateFile();
   }
 
-  /**
-   * Metodo utilizado para buscar un producto
-   * @param {identificador del producto} idProd
-   * @returns
-   */
+  /**Método que busca un producto por su ID*/
   async getProductById(idProd) {
     const prdBuscado = this.#products.find((prd) => prd.id === idProd);
     if (!prdBuscado) {
@@ -138,9 +101,7 @@ class ProductManager {
     return prdBuscado;
   }
 
-  /**
-   * Actualiza el contenido del archivo con los productos actualizados
-   */
+  /*Escribe los productos en el archivo JSON.*/
   async #updateFile() {
     await fs.promises.writeFile(
       filename,
@@ -150,9 +111,7 @@ class ProductManager {
     return true;
   }
 
-  /**
-   * Actualiza el array con la nueva información
-   */
+  /**Actualiza la información de un producto */
   async updateProduct(updatedProduct) {
     console.log("Nuevos datos => ", updatedProduct);
     const productIndex = this.findProductIndex(updatedProduct.code);
@@ -162,16 +121,13 @@ class ProductManager {
       return;
     }
 
-    // grabamos los cambios en el arreglo
     const product = { ...this.#products[productIndex], ...updatedProduct };
     this.#products[productIndex] = product;
 
     await this.#updateFile();
   }
 
-  /**
-   * Elimina producto utilizando el code del producto
-   */
+  /**Elimina un producto del arreglo*/
   async deleteProduct(code) {
     const productIndex = this.findProductIndex(code);
 
@@ -180,9 +136,7 @@ class ProductManager {
       return;
     }
 
-    //quitamos el producto utilizando su ubicación
     this.#products.splice(productIndex, 1);
-
     await this.#updateFile();
   }
 }

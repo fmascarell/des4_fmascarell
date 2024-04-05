@@ -79,7 +79,7 @@ app.get("/carts/:idc", async (req, res) => {
 app.post("/api/cart/", async (req, res) => {
   console.log(req.query.idc, req.query.idp, req.query.quantity);
 
-  const status = await cartManager.addProduct2Cart(
+  const status = await cartManager.addProductCart(
     req.query.idc,
     req.query.idp,
     req.query.quantity
