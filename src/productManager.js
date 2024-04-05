@@ -1,111 +1,190 @@
-//const { CardTitle } = require("react-bootstrap");
-//const fs = require('fs');
-import fs from 'fs';
+const fs = require("fs");
+const filename = "../assets/productos.json";
 
 class ProductManager {
-    #products;
-    #path;
-    static productId = 0;
+  #products = [];
 
-    constructor(){
-        this.#path = './src/data/productos.json';
-        this.#products = this.#getInFile();
+  #maxId = 0;
+
+  constructor() {
+    this.#products = [];
+  }
+
+  /**
+   * Utilizado para obtener el mayor ID del arreglo
+   * con este valor luego se aumenta para registrar un nuevo producto
+   */
+  getMaxId(arr) {
+    let max = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+      parseInt(arr[i].id) > max ? (max = arr[i].id) : max;
     }
 
-    #resetProductId() {
-        let id = 1;
-        if (this.#products.length !== 0) 
-            id = this.#products[this.#products.length - 1].id + 1; 
-        return id;
-    }      
+    return max + 1;
+  }
 
-    #getInFile(){
-        try {
-            if (fs.existsSync(this.#path)){
-                return JSON.parse(fs.readFileSync(this.#path,'utf-8'));
-            }
-            return [];
-        } catch (error) {
-            console.log(`se ha producido el siguiente error: ${error}`);
-        }
+  async initialize() {
+    this.#products = await this.readProductsFromFile();
+
+    this.#maxId = this.getMaxId(this.#products);
+  }
+
+  /**
+   * Leemos el archivo y su texto lo convertimos a JSON
+   * @returns array con registros
+   */
+
+  async readProductsFromFile() {
+    try {
+      const ProductsFileContent = await fs.promises.readFile(filename, "utf-8");
+
+      const jsonFC = JSON.parse(ProductsFileContent);
+
+      return jsonFC;
+    } catch (err) {
+      return [];
+    }
+  }
+
+  /**
+   *
+   * @returns Obtiene todos productos
+   */
+  async getProducts() {
+    return await this.readProductsFromFile();
+  }
+
+  /**
+   * Busca la posición del producto dentro del array
+   *
+   * @param {code} codigo del producto
+   * @returns indice del producto
+   */
+  findProductIndex(code) {
+    const productIndex = this.#products.findIndex((p) => p.code === code);
+
+    return productIndex;
+  }
+
+  async isNumeric(value) {
+    return /^\d+$/.test(value);
+  }
+  /**
+   *
+   * Agreamos un nuevo producto previamente se validar que este no exista
+   *
+   * @param {String} title
+   * @param {String} description
+   * @param {Number} price
+   * @param {String} thumbnail
+   * @param {String} code
+   * @param {Number} stock
+   * @param {Boolean} status
+   * @returns
+   */
+  async addProduct(
+    title,
+    description,
+    price,
+    thumbnail,
+    code,
+    stock,
+    status = true
+  ) {
+    if (!title || !description || !price || !thumbnail || !code || !stock)
+      return "Debe enviar todos los valores (title, description, price, thumbnail, code, stock, status)";
+
+    if (isNaN(price)) return "Price no válidos";
+
+    if (isNaN(stock)) return "Stock no válidos";
+
+    const productIndex = this.findProductIndex(code);
+
+    if (productIndex > -1) {
+      console.error("Producto ya existe");
+      return "Producto ya existe";
     }
 
-    #setInFile(){
-        try {
-            fs.writeFileSync(this.#path, JSON.stringify(this.#products))
-        } catch (error) {
-            console.log(`se ha producido el siguiente error: ${error}`);
-        }
+    const id = this.#maxId++;
+
+    const product = {
+      id,
+      title,
+      description,
+      price,
+      thumbnail,
+      code,
+      stock,
+      status,
+    };
+
+    this.#products.push(product);
+
+    return await this.#updateFile();
+  }
+
+  /**
+   * Metodo utilizado para buscar un producto
+   * @param {identificador del producto} idProd
+   * @returns
+   */
+  async getProductById(idProd) {
+    const prdBuscado = this.#products.find((prd) => prd.id === idProd);
+    if (!prdBuscado) {
+      console.error("producto no encontrado");
+      return;
+    }
+    return prdBuscado;
+  }
+
+  /**
+   * Actualiza el contenido del archivo con los productos actualizados
+   */
+  async #updateFile() {
+    await fs.promises.writeFile(
+      filename,
+      JSON.stringify(this.#products, null, "\t")
+    );
+
+    return true;
+  }
+
+  /**
+   * Actualiza el array con la nueva información
+   */
+  async updateProduct(updatedProduct) {
+    console.log("Nuevos datos => ", updatedProduct);
+    const productIndex = this.findProductIndex(updatedProduct.code);
+
+    if (productIndex < 0) {
+      console.error("Producto no encontrado");
+      return;
     }
 
-    addProduct(title, description, price, thumbnail, code, stock){
+    // grabamos los cambios en el arreglo
+    const product = { ...this.#products[productIndex], ...updatedProduct };
+    this.#products[productIndex] = product;
 
-        if (!title|| !description || !price || !thumbnail || !code || !stock)
-            return `Ingrese todos los datos son requeridos`;
+    await this.#updateFile();
+  }
 
-        const duplicateParam = this.#products.some(item => item.code == code);
-        
-        if (duplicateParam)
-            return `El código ${code} ya se encuentra registrado`;
+  /**
+   * Elimina producto utilizando el code del producto
+   */
+  async deleteProduct(code) {
+    const productIndex = this.findProductIndex(code);
 
-        ProductManager.productId = ProductManager.productId + 1;
-        const id = this.#resetProductId();
-
-        const newProduct = {
-            id
-            ,title
-            ,description
-            ,price
-            ,thumbnail
-            ,code
-            ,stock        
-        }
-
-        this.#products.push(newProduct);
-        this.#setInFile();
-        return `Producto ha sido agregado con exito`;
+    if (productIndex < 0) {
+      console.error("Producto no encontrado");
+      return;
     }
 
-    getProduct(limit = 0){
-        limit = Number(limit);
-        if (limit >0)
-            return this.#products.slice(0, limit);
-        return this.#products;
-    }
+    //quitamos el producto utilizando su ubicación
+    this.#products.splice(productIndex, 1);
 
-    getProductById(id){
-        const producto = this.#products.find(item => item.id == id);
-        if (producto)
-            return producto;
-        else
-            return `Not found product id ${id}`;
-    }
-
-    updateProduct(id, updatedProduct){
-        let message = `El producto ${id} no existe`;
-        const index = this.#products.findIndex(item => item.id === id);
-        if (index !== -1){
-            const { id: productId, ...obj } = updatedProduct; // Extrae el id del objeto updatedProduct
-            this.#products[index] = {...this.#products[index], ...obj}; // Fusiona el objeto restante con el producto existente
-            this.#setInFile(); 
-            message = 'El producto ha sido actualizado';
-        }
-        return message; 
-    }
-
-    deleteProduct(id){
-        let message = `El producto ${id} no existe`;
-        const index = this.#products.findIndex(item => item.id === id);
-        if (index !== -1){
-            this.#products.splice(index, 1); 
-            this.#setInFile(); 
-            message = 'El producto ha sido eliminado';
-        }
-        return message; 
-    }    
+    await this.#updateFile();
+  }
 }
 
-//module.exports = ProductManager;
-export default ProductManager;
-
-
+module.exports = ProductManager;

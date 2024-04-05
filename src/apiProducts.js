@@ -1,14 +1,14 @@
 const express = require("express");
-const pManager = require("./productManager");
-const cManager = require("./cartManager");
+const ProductManager = require("./productManager");
+const CartManager = require("./cartManager");
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-prodManager = new pManager();
-cartManager = new cManager();
+productManagerInstance = new ProductManager();
+cartManagerInstance = new CartManager();
 
 app.get("/", async (req, res) => {
   res.end("Bienvenido...");
@@ -24,7 +24,7 @@ app.get("/product/", async (req, res) => {
   }
 
   console.log("limit => ", nLimit);
-  let products = await prodManager.getProducts();
+  let products = await productManagerInstance.getProducts();
 
   if (limit > 0) products = products.slice(0, limit);
 
@@ -34,8 +34,7 @@ app.get("/product/", async (req, res) => {
 /** Obtiene producto por su id */
 app.get("/product/:id", async (req, res) => {
   console.log(req.params.id);
-
-  const product = await prodManager.getProductById(parseInt(req.params["id"])); //req.params.id)
+  const product = await productManagerInstance.getProductById(parseInt(req.params["id"])); 
 
   if (product) {
     res.json({ status: "ok", result: product });
@@ -46,7 +45,7 @@ app.get("/product/:id", async (req, res) => {
 
 /** Almacena un nuevo producto */
 app.post("/api/product/", async (req, res) => {
-  const status = await prodManager.addProduct(
+  const status = await productManagerInstance.addProduct(
     req.query.title,
     req.query.description,
     req.query.price,
@@ -68,7 +67,7 @@ app.get("/carts/", async (req, res) => {
 });
 
 app.get("/carts/:idc", async (req, res) => {
-  const product = await prodManager.getProductById(parseInt(req.params.id));
+  const product = await productManagerInstance.getProductById(parseInt(req.params.id));
 
   if (product) {
     res.json(product);
@@ -93,17 +92,17 @@ app.post("/api/cart/", async (req, res) => {
 });
 
 /* Inicializa el gestor de carros de compras */
-cartManager.initialize();
+cartManagerInstance.initialize();
 
 /* Inicializa el gestor de productos y comienza a escuchar las solicitudes en el puerto 8080 */
-prodManager
+productManagerInstance
   .initialize()
   .then(() => {
     app.listen(8080, function (err) {
-      console.log("Server listening on Port", 8080);
+      console.log("Servidor escuchando en el puerto", 8080);
     });
   })
   .catch((err) => {
-    console.log("Error in server...");
+    console.log("Error en el servidor...");
     console.err(err);
   });
