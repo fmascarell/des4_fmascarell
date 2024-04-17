@@ -34,5 +34,3 @@ sockServer.on('connection', socket => {
   console.log('Client connected from the front');
 });
 
-/*<script src="/socket.io/socket.io.js"></script>
-<script src="/js/index.js"></script>*/

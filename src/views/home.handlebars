@@ -32,7 +32,13 @@
                     Inactivo
                     {{/if}}
                 </td>
-                <td>{{this.thumbnail}}</td>
+                <td>
+                    {{#if this.thumbnail.lenght}}
+                    <a href="{{this.thumbnail.[0]}}" target="_blank">{{this.thumbnail.[0]}}</a>
+                    {{else}}
+                    Imagen no disponible
+                    {{/if}}
+                </td>
             </tr>
             {{/each}}
         </tbody>
