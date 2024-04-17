@@ -7,6 +7,7 @@
         "thumbnail": "https://falabella.scene7.com/is/image/Falabella/50244888_1?wid=1500&hei=1500&qlt=70",
         "code": "k01-24",
         "stock": 56,
+        "category": "Lentes",
         "status": true
     },
     {
@@ -17,6 +18,7 @@
         "thumbnail": "https://falabella.scene7.com/is/image/Falabella/16075285_1?wid=1500&hei=1500&qlt=70",
         "code": "e01-24",
         "stock": 25,
+        "category": "Lentes",
         "status": true
     },
     {
@@ -27,6 +29,7 @@
         "thumbnail": "https://falabella.scene7.com/is/image/Falabella/50295196_1?wid=1500&hei=1500&qlt=70",
         "code": "k02-24",
         "stock": 25,
+        "category": "Lentes",
         "status": true
     },
     {
@@ -37,6 +40,7 @@
         "thumbnail": "https://falabella.scene7.com/is/image/Falabella/16328850_1?wid=1500&hei=1500&qlt=70",
         "code": "r01-24",
         "stock": 25,
+        "category": "Lentes",
         "status": true
     },
     {
@@ -47,6 +51,7 @@
         "thumbnail": "https://falabella.scene7.com/is/image/Falabella/gsc_117557747_1805040_1?wid=1500&hei=1500&qlt=70",
         "code": "t01-24",
         "stock": 25,
+        "category": "Lentes",
         "status": true
     },
     {
@@ -57,6 +62,7 @@
         "thumbnail": "https://falabella.scene7.com/is/image/Falabella/gsc_112995169_486909_1?wid=1500&hei=1500&qlt=70",
         "code": "a01-24",
         "stock": 45,
+        "category": "Lentes",
         "status": true
     },
     {
@@ -67,6 +73,7 @@
         "thumbnail": "https://falabella.scene7.com/is/image/Falabella/gsc_116928216_1607797_1?wid=1500&hei=1500&qlt=70",
         "code": "b01-24",
         "stock": 25,
+        "category": "Lentes",
         "status": true
     },
     {
@@ -77,6 +84,7 @@
         "thumbnail": "https://falabella.scene7.com/is/image/Falabella/gsc_112981400_481200_1?wid=1500&hei=1500&qlt=70",
         "code": "r02-24",
         "stock": 30,
+        "category": "Lentes",
         "status": true
     },
     {
@@ -87,6 +95,7 @@
         "thumbnail": "https://falabella.scene7.com/is/image/Falabella/gsc_115355698_1086126_1?wid=1500&hei=1500&qlt=70",
         "code": "k02-24",
         "stock": 25,
+        "category": "Lentes",
         "status": true
     },
     {
@@ -97,6 +106,7 @@
         "thumbnail": "https://falabella.scene7.com/is/image/Falabella/gsc_117126480_1669030_1?wid=1500&hei=1500&qlt=70",
         "code": "p01-24",
         "stock": 25,
+        "category": "Lentes",
         "status": true
     }
 ]
