@@ -1,12 +1,14 @@
 {
-  "name": "clase6",
+  "name": "04_desafio",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "productManager.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon ./src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {

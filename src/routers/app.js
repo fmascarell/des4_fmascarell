@@ -1,5 +1,5 @@
 import express from "express";
-import { Server } from "socket.io";
+import { Server, Socket } from "socket.io";
 import { engine, Engine } from "express-handlebars";
 
 import products from './routers/products.js';
@@ -25,6 +25,9 @@ app.get('/', (req, res) => {
 app.use('./api/products', products);
 app.use('./api/carts', carts);
 
-app.listen(PORT, () => {
-  console.log(`App run in port ${PORT}`);
+const expServer = app.listen(PORT, () => {console.log(`App run in port ${PORT}`);});
+const sockServer = new Server(home.handlebars);
+
+sockServer.on('connection', socket => {
+  console.log('Client connected from the front');
 });
