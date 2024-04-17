@@ -1,57 +1,30 @@
-const express = require("express");
-const productManagerInstance = require("./productManager");
+import express from "express";
+import { Server } from "socket.io";
+import { engine, Engine } from "express-handlebars";
+
+import products from './routers/products.js';
+import carts from './routers/carts.js';
+import __dirname from "./utils.js";
+
+
 const app = express();
+const PORT = 8080;
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); // para que nuestro server sepa entender JSON
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(express.static(__dirname + '/public'));
 
-const productsManager = new productManagerInstance();
+app.engine('handlebars', engine());
+app.set('views', __dirname + './views');
+app.set('view engine','handlebars');
 
-productsManager.initialize()
-  .then(() => {
-    // Rutas de la aplicación
-    app.get("/", async (req, res) => {
-      res.end("Bienvenido...");
-    });
+app.get('/', (req, res) => {
+  return res.render('home');
+});
 
-    app.get("/product", async (req, res) => {
-        const limit = req.query.limit;
-        let nLimit = 0;
+app.use('./api/products', products);
+app.use('./api/carts', carts);
 
-        if (!isNaN(limit)) {
-            nLimit = parseInt(limit);
-        }
-
-        console.log("limit => ",nLimit);
-
-        let products = await productsManager.getProducts();
-
-        if(limit > 0) {
-            products = products.slice(0, limit);
-        }
-
-        res.json(products);
-    });
-
-    app.get("/product/:id", async (req, res) => {
-      const product = await productsManager.getProductById(parseInt(req.params.id));
-
-      if (product) {
-        res.json(product);
-      } else {
-        res.end("error, Producto no Encontrado");
-      }
-    });
-
-    // Iniciar el servidor
-    app.listen(8080, function (err) {
-      if (err) {
-        console.log("Error in server setup:", err);
-      } else {
-        console.log("Server listening on Port 8080");
-      }
-    });
-  })
-  .catch(err => {
-    console.log("Error in server setup:", err);
-  });
+app.listen(PORT, () => {
+  console.log(`App run in port ${PORT}`);
+});
