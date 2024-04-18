@@ -17,20 +17,40 @@
                 <th>Imágen</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+        <tbody id="productos-body">
         </tbody>
     </table>
+
+    <h2>Nuevo</h2>
+    <form id="form">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required>
+
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="descripcion" required>
+
+        <label for="precio">Precio:</label>
+        <input type="text" id="precio" name="precio" required>
+
+        <label for="codigo">Código:</label>
+        <input type="text" id="codigo" name="codigo" required>
+
+        <label for="stock">Stock:</label>
+        <input type="text" id="stock" name="stock" required>
+
+        <label for="categoria">Categoría:</label>
+        <input type="text" id="categoria" name="categoria" required>
+
+        <!--<label for="estado">Estado:</label>
+        <input type="text" id="estado" name="estado" required>
+
+        <label for="imagen">Imagen:</label>
+        <input type="text" id="imagen" name="imagen" required>-->
+
+        <button type="submit">Agregar</button>
+
+    </form>
+    
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
