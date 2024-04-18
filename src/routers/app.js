@@ -41,7 +41,8 @@ sockServer.on('connection', socket => {
   socket.on('addProduct', product =>{
     const result = prod.addProduct(product);
     console.log({result});
+    if (result.product)
+      socket.emit('productos', productos);
   })
-
 });
 
