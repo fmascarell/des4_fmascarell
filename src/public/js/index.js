@@ -1,6 +1,7 @@
 const socket = io();
 
 socket.on('productos', productos => {
+
     console.log(productos);
     const body = document.getElementById('productos-body');
     body.innerHTML = '';
@@ -17,12 +18,12 @@ socket.on('productos', productos => {
         <td>${producto.stock}</td>
         <td>${producto.category}</td>
         <td>${producto.status ? 'Activo': 'Inactivo'}</td>
-        <td>${producto.thumbnail.lenght > 0 ? producto.thumbnail:'No hay imágen'}</td>
+        <td>${producto.thumbnails.lenght > 0 ? producto.thumbnails[0]:'Sin imágen'}</td>
         `;
     });
 });
 
-const formulario = document.getElementById('form'); 
+const formulario = document.getElementById('form-prod'); 
 
 formulario.addEventListener('submit', function (event) {
     event.preventDefault();

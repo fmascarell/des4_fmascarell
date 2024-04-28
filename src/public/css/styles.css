@@ -11,7 +11,8 @@ th, td{
 }
 
 th{
-    background-color:black;
+    background-color:rgb(160, 200, 245);
+    color: black; 
 }
 
 ul{
