@@ -35,6 +35,7 @@ sockServer.on('connection', socket => {
   console.log('Client connected from the front');
   const productos = prod.getProduct();
   socket.emit('productos', productos);
+  //console.log(productos);
 
   socket.on('addProduct', product =>{
     const result = prod.addProduct({...product});

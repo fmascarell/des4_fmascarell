@@ -8,7 +8,7 @@ class ProductManager {
   //static productId = 0;
 
   constructor() {
-    this.#path = "./src/data/productos.json";
+    this.#path = "./src/assets/productos.json";
     this.#products = this.#getInFile();
   }
 
@@ -80,6 +80,7 @@ class ProductManager {
   getProduct(limit = 0) {
     limit = Number(limit);
     if (limit > 0) return this.#products.slice(0, limit);
+    //console.log(this.#products);
     return this.#products;
   }
 

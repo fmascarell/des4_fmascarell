@@ -3,11 +3,11 @@ const socket = io();
 socket.on('productos', productos => {
 
     console.log(productos);
-    const body = document.getElementById('productos-body');
-    body.innerHTML = '';
+    const tbody = document.getElementById('productos-body');
+    tbody.innerHTML = '';
 
-    productos.array.forEach(producto => {
-        const row = body.insertRow();
+    productos.forEach(producto => {
+        const row = tbody.insertRow();
 
         row.innerHTML = `
         <td>${producto.id}</td>
@@ -44,5 +44,4 @@ formulario.addEventListener('submit', function (event) {
     }
 
     socket.emit('addProduct', producto);
-    formulario.requestFullscreen();
 })

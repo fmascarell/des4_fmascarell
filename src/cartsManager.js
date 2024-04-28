@@ -9,7 +9,7 @@ class CartsManager {
   //static productId = 0;
 
   constructor() {
-    this.#path = "./src/data/carro.json";
+    this.#path = "./src/assets/cart.json";
     this.#carts = this.#getCartInFile();
   }
 

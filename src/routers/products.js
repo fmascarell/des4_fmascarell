@@ -5,14 +5,17 @@ const router = Router();
 
 router.get('/', (req,res) => {
     const {limit} = req.query;
+    console.log(req.query);
     const prod = new ProductManager();
-    return res.json({ productos: prod.getProduct(limit)});
+    const productos = prod.getProduct(limit);
+    res.render('productos', { productos }); 
+    //return res.json({ productos: prod.getProduct(limit)});
 });
 
 router.get('/:pid', (req,res) => {
     const {limit} = req.query;
     const prod = new ProductManager();
-    return res.json({ producto: prod.getProductById(Number(pid))});
+    return res.json({ productos: prod.getProductById(Number(pid))});
 });
 
 router.post('/',(req,res)=>{
