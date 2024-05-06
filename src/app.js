@@ -25,8 +25,8 @@ app.set('view engine','handlebars');
 //})
 
 app.use('/', views);
-app.use('./api/products', products);
-app.use('./api/carts', carts);
+app.use('/api/products', products);
+app.use('/api/carts', carts);
 
 const expServer = app.listen(PORT, () => {console.log(`App run in port ${PORT}`);});
 const sockServer = new Server(expServer);

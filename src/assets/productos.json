@@ -152,5 +152,16 @@
         "stock": "4",
         "category": "5",
         "status": true
+    },
+    {
+        "id": 15,
+        "title": "prueba 4",
+        "description": "Lente sol",
+        "price": "25000",
+        "thumbnails": [],
+        "code": "123qweqweqw",
+        "stock": "5",
+        "category": "sol",
+        "status": true
     }
 ]
